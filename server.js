@@ -37,6 +37,13 @@ app.get("/pusher/auth", function(req, res) {
 	"Content-Type": "application/javascript"
 });
 
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+ 	app.use(express.static("client/build"));
+	} else {
+ 	app.use(express.static(__dirname + "/client/public"));
+}
+
 res.send(cb);
 });
 

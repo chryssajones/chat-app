@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Pusher from 'pusher-js';
 import ChatHandler from './components/chatbox/ChatHandler';
-import Map from './components/map/MapBox';
+// import Map from './components/map/MapBox';
 import './App.css';
 
 class App extends Component {
@@ -16,12 +16,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const username = window.prompt('Username: ', 'Anonymous');
+    const username = window.prompt('Your name: ', 'Anonymous');
     this.setState({ username });
     const pusher = new Pusher('0e660fbb1049d403653d', {
       cluster: 'us2',
       encrypted: true
     });
+
     const channel = pusher.subscribe('chat');
     channel.bind('message', data => {
       this.setState({ chats: [...this.state.chats, data], test: '' });
@@ -46,7 +47,7 @@ class App extends Component {
       <div>
         <div className="App">
           <header className="App-header">
-            <h1 className="App-title">Pick Me Up!</h1>
+            <h1 className="App-title">Pick Me Up! Chat Box</h1>
           </header>
           <div>
             <ChatHandler />
